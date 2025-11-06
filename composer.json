@@ -1,12 +1,12 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "studio24/accessible-forms",
+    "description": "This is my package accessible-forms",
     "keywords": [
         "studio24"
     ],
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/studio24/accessible-forms",
     "require": {
         "php": "^8.2"
     },
@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\PackageTemplate\\": "src"
+            "Studio24\\AccessibleForms\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\PackageTemplate\\Tests\\": "tests"
+            "Studio24\\AccessibleForms\\Tests\\": "tests"
         }
     },
     "scripts": {
