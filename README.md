@@ -10,6 +10,7 @@ Accessible forms in Laravel and Symfony.
 Add any notes here on problems to solve:
 
 - What helpers do we need to make form generation easier?
+- Page title Twig filter needs updating to detect number of form validation issues
 - Twig in Barryvdh\Form appears to be installed separately to TwigBridge - is this an issue? Twig extension appears to be available for both.
 - Can we automate adding the template paths, currently copy config/form.php across
 
@@ -54,7 +55,7 @@ return [
 ];
 ```
 
-To enable TwigExtension in your normal Twig templates (not form twig templates at present) edit `config/twibridge.php`
+To enable TwigExtension in your normal Twig templates (not form twig templates at present) edit `config/twigbridge.php`
 
 ```php
 return [
