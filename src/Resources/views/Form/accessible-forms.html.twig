@@ -1,0 +1,7 @@
+{# Extends vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig #}
+{% use 'form_div_layout.html.twig' %}
+
+{%- block form_label_content -%}
+    {%- set name = "A11Y " ~ name -%}
+    {{- parent() -}}
+{%- endblock form_label_content -%}

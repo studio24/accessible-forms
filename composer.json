@@ -2,13 +2,18 @@
     "name": "studio24/accessible-forms",
     "description": "This is my package accessible-forms",
     "keywords": [
-        "studio24"
+        "studio24",
+        "forms",
+        "accessibility",
+        "laravel",
+        "symfony"
     ],
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/studio24/accessible-forms",
     "require": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "barryvdh/laravel-form-bridge": "^0.7.4"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
@@ -27,6 +32,9 @@
         }
     },
     "scripts": {
+        "post-install-cmd": [
+            "@php -r \"file_exists('config/form.php') || copy('vendor/studio24/accessible-forms/config/form.php', 'config/form.php');\""
+        ],
         "test": "./vendor/bin/phpunit",
         "cs": "./vendor/bin/phpcs",
         "format": "./vendor/bin/phpcbf",
