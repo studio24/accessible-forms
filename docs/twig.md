@@ -4,7 +4,10 @@
 
 ### form_all_errors
 
-You can return all form error as an array of errors with `form_all_errors`.
+You can return all form error as an array of errors with `form_all_errors`. Each error contains the following data: 
+- `id` - form field ID
+- `name` - form name
+- `message` - error message
 
 ```
 {% set all_errors = form_all_errors(form) %}
