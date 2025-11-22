@@ -31,6 +31,8 @@ You can install the package via [Composer](https://getcomposer.org/):
 composer require studio24/accessible-forms
 ```
 
+See usage instructions for [Symfony](docs/symfony.md) and [Laravel](docs/laravel.md).
+
 ### Local install (remove this on release)
 During testing you can install this from a local copy via:
 
