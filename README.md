@@ -3,16 +3,21 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/studio24/accessible-forms.svg?style=flat-square)](https://packagist.org/packages/studio24/accessible-forms)
 [![Tests](https://img.shields.io/github/actions/workflow/status/studio24/accessible-forms/php.yml?branch=main&label=tests&style=flat-square)](https://github.com/studio24/accessible-forms/actions/workflows/php.yml)
 
-Accessible forms in Laravel and Symfony.
+Create more accessible forms in your PHP apps.
 
-## Todo
+## What does this library do?
 
-Add any notes here on problems to solve:
+This library helps you create accessible forms within your PHP app. It uses [Symfony Form](https://symfony.com/packages/Form) 
+as the underlying form library. 
 
-- What helpers do we need to make form generation easier?
-- Page title Twig filter needs updating to detect number of form validation issues
-- Twig in Barryvdh\Form appears to be installed separately to TwigBridge - is this an issue? Twig extension appears to be available for both.
-- Can we automate adding the template paths, currently copy config/form.php across
+It includes:
+
+- Accessible form themes 
+- Support for the [GOV.UK Design System](https://design-system.service.gov.uk/)
+- Error summary block
+- Update page titles on form validation errors
+
+Each feature is explained in the [docs](docs/README.md). Usage instructions for Symfony and Laravel are included.
 
 ## Requirements
 
@@ -26,7 +31,7 @@ You can install the package via [Composer](https://getcomposer.org/):
 composer require studio24/accessible-forms
 ```
 
-### Local install
+### Local install (remove this on release)
 During testing you can install this from a local copy via:
 
 ```shell
@@ -42,58 +47,6 @@ ddev composer update
 ```
 
 See https://github.com/studio24/dev-playbook/blob/main/composer/testing-local-packages.md
-
-## Usage
-
-### Laravel
-
-Add the service provider to `bootstrap/providers.php`
-
-```php
-return [
-    Barryvdh\Form\ServiceProvider::class,
-];
-```
-
-To enable TwigExtension in your normal Twig templates (not form twig templates at present) edit `config/twigbridge.php`
-
-```php
-return [
-    'extensions' => [
-        'enabled' => [
-            'Studio24\AccessibleForms\Twig\AccessibleFormsExtension',
-        ],
-    ],
-];
-```
-
-Create a form class:
-
-See https://symfony.com/doc/current/forms.html#creating-form-classes
-
-The form processing workflow is:
-
-1. Display form
-2. Form submitted via POST request
-3. Form request data is validated
-4. If pass validation, do something, and redirect to success page
-5. If fail validation, redisplay form with validation messages (and no redirect)
-
-Add form processing code to your controller:
-
-```php
-$form = $this->createForm(ContactForm::class);
-
-$form->handleRequest($request);
-
-if ($form->isSubmitted() && $form->isValid()) {
-    // Do something, e.g. save data
-    return 'Form submitted successfully';
-}
-
-// Display form to user, with validation if submitted and fails validation
-return view('template-name', ['form' => $form->createView()]);
-```
 
 ## Testing
 

@@ -29,8 +29,6 @@ This form has {{ form_error_count(form) }} errors.
 {{ form_error_summary(form) }}
 ```
 
-See https://design-system.service.gov.uk/components/error-summary/
-
 ## Filters
 
 ### prefix_on_errors
@@ -70,3 +68,6 @@ See https://design-system.service.gov.uk/patterns/validation/
     This form has {{ form_error_count(form) }} errors
 {% endif %}
 ```
+
+---
+Back to [Docs index](README.md)

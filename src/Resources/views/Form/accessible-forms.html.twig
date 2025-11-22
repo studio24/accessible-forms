@@ -1,13 +1,6 @@
 {# Extends vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig #}
 {% use 'form_div_layout.html.twig' %}
 
-{%- block form -%}
-    {{ form_error_summary(form) }}
-    {{ form_start(form) }}
-    {{- form_widget(form) -}}
-    {{ form_end(form) }}
-{%- endblock form -%}
-
 {%- block form_error_summary -%}
     {% if form is not valid %}
     <div id="site-aria-alert" role="alert">
@@ -26,3 +19,13 @@
     </div>
     {% endif %}
 {%- endblock form_error_summary -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul>
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
