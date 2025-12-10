@@ -23,7 +23,9 @@
 {#  Appears as error above each field #}
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
-        <span id="id_{{ id }}_error" class="tbxforms-error-message">Error: {{ errors|first.message }}</span>
+        {% for error in errors %}
+            <span id="id_{{ id }}_error{{ loop.index }}" class="tbxforms-error-message">Error: {{ error.message }}</span>
+        {% endfor %}
     {%- endif -%}
 {%- endblock form_errors -%}
 
