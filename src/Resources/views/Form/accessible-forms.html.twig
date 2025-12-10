@@ -36,6 +36,10 @@
 
 {%- block form_row -%}
     {% set row_attr = row_attr|merge({'class': 'tbxforms-form-group'}) %}
+    {%- if errors|length > 0 -%}
+        {% set class = row_attr.class ~  ' tbxforms-form-group--error' %}
+        {% set row_attr = row_attr|merge({'class': class}) %}
+    {%- endif -%}
     {{- parent() -}}
 {%- endblock form_row -%}
 
