@@ -130,7 +130,7 @@
 </div>
 {% endblock checkbox_row %}
 
-{# Checkbox / Radio buttons #}
+{# Add custom markup to checkbox / radio buttons in choice context #}
 {%- block choice_widget_expanded -%}
     <div {{ block('widget_container_attributes') }}>
         <div class="{% if multiple %}tbxforms-checkboxes{% else %}govuk-radios{% endif %}">
@@ -168,3 +168,15 @@
     {% set attr = attr|merge({'class': 'tbxforms-select'}) %}
     {{- parent() -}}
 {%- endblock choice_widget_collapsed -%}
+
+{# Add class and SVG to buttons #}
+{%- block button_widget -%}
+    {% set attr = attr|merge({'class': 'rnib-button rnib-button--primary'}) %}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+        {{- block('form_label_content') -}}
+        <svg viewBox="0 0 8 16" class="icon icon--chevron rnib-button__icon" aria-hidden="true" focusable="false">
+            <path d="M3.692 0H0l4.308 8L0 16h3.692L8 8 3.692 0Z" fill="currentColor"></path>
+        </svg>
+    </button>
+{%- endblock button_widget -%}
+
