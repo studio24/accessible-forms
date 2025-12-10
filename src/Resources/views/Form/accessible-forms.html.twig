@@ -20,13 +20,10 @@
     {% endif %}
 {%- endblock form_error_summary -%}
 
+{#  Appears as error above each field #}
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
-        <ul>
-            {%- for error in errors -%}
-                <li>{{ error.message }}</li>
-            {%- endfor -%}
-        </ul>
+        <span id="id_{{ id }}_error" class="tbxforms-error-message">Error: {{ errors|first.message }}</span>
     {%- endif -%}
 {%- endblock form_errors -%}
 
@@ -39,3 +36,35 @@
     {% set row_attr = row_attr|merge({'class': 'tbxforms-form-group'}) %}
     {{- parent() -}}
 {%- endblock form_row -%}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({for: id}) %}
+        {%- endif -%}
+        {% set label_attr = label_attr|merge({'class': 'rnib-form-label'}) %}
+        <h2 class="rnib-form-label__wrapper">
+            <{{ element|default('label') }}{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
+                {{- block('form_label_content') -}}
+            </{{ element|default('label') }}>
+        </h2>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{% block form_help -%}
+    {%- if help -%}
+        <div id="id_{{ id }}_hint" class="rnib-form-hint">
+            {{- block('form_help_content') -}}
+        </div>
+    {%- endif -%}
+{%- endblock form_help %}
+
+{# Adjust order of elements in form row #}
+{%- block form_row_render -%}
+    <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+    </div>
+{%- endblock form_row_render -%}
