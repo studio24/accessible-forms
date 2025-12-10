@@ -29,3 +29,13 @@
         </ul>
     {%- endif -%}
 {%- endblock form_errors -%}
+
+{%- block form_start -%}
+    {% set attr = attr|merge({'class': 'tbxforms'}) %}
+    {{- parent() -}}
+{%- endblock form_start -%}
+
+{%- block form_row -%}
+    {% set row_attr = row_attr|merge({'class': 'tbxforms-form-group'}) %}
+    {{- parent() -}}
+{%- endblock form_row -%}
