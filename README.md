@@ -36,8 +36,21 @@ See usage instructions for [Symfony](docs/symfony.md) and [Laravel](docs/laravel
 ### Local install (remove this on release)
 During testing you can install this from a local copy via:
 
+Edit `.ddev/docker-compose.mounts.yaml` and run `ddev restart`:
+
+```yaml
+     "repositories": {
+        "local": {
+            "type": "path",
+            "url": "/home/accessible-forms"
+        }
+    }
+```
+
+Update Composer to point to your local repo:
+
 ```shell
-composer config repositories.local path "~/Sites/studio24/accessible-forms/"
+composer config repositories.local path "/home/accessible-forms"
 composer require studio24/accessible-forms:dev-main
 ```
 
@@ -47,6 +60,8 @@ To remove this after testing:
 ddev composer config repositories.local --unset
 ddev composer update
 ```
+
+And remove the DDEV mount from `.ddev/docker-compose.mounts.yaml`
 
 See https://github.com/studio24/dev-playbook/blob/main/composer/testing-local-packages.md
 
