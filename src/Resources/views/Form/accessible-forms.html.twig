@@ -35,27 +35,64 @@
 {%- endblock form_start -%}
 
 {%- block form_row -%}
+    {% if expanded %}
+        <fieldset class="tbxforms-fieldset">
+    {% endif %}
     {% set row_attr = row_attr|merge({'class': 'tbxforms-form-group'}) %}
     {%- if errors|length > 0 -%}
         {% set class = row_attr.class ~  ' tbxforms-form-group--error' %}
         {% set row_attr = row_attr|merge({'class': class}) %}
     {%- endif -%}
     {{- parent() -}}
+    {% if expanded %}
+        </fieldset>
+    {% endif %}
 {%- endblock form_row -%}
 
+{# Field rows become fieldsets on checkbox and radio buttons, so make the label the legend #}
 {%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if expanded %}
+            <legend>{{- block('form_label_content') -}}</legend>
+        {% else %}
+            {% if not compound -%}
+                {% set label_attr = label_attr|merge({for: id}) %}
+            {%- endif -%}
+            {% set label_attr = label_attr|merge({'class': 'rnib-form-label'}) %}
+            <h2 class="rnib-form-label__wrapper">
+                <{{ element|default('label') }}{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
+                    {{- block('form_label_content') -}}
+                </{{ element|default('label') }}>
+            </h2>
+        {% endif %}
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{% block checkbox_label %}
     {% if label is not same as(false) -%}
         {% if not compound -%}
             {% set label_attr = label_attr|merge({for: id}) %}
         {%- endif -%}
-        {% set label_attr = label_attr|merge({'class': 'rnib-form-label'}) %}
-        <h2 class="rnib-form-label__wrapper">
-            <{{ element|default('label') }}{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
-                {{- block('form_label_content') -}}
-            </{{ element|default('label') }}>
-        </h2>
+        {% set label_attr = label_attr|merge({'class': 'tbxforms-label tbxforms-checkboxes__label'}) %}
+
+        <{{ element|default('label') }}{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
+        {{- block('form_label_content') -}}
+        </{{ element|default('label') }}>
     {%- endif -%}
-{%- endblock form_label -%}
+{% endblock %}
+
+{% block radio_label %}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({for: id}) %}
+        {%- endif -%}
+        {% set label_attr = label_attr|merge({'class': 'rnib-form-label rnib-form-label--option govuk-radios__label'}) %}
+
+        <{{ element|default('label') }}{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
+        {{- block('form_label_content') -}}
+        </{{ element|default('label') }}>
+    {%- endif -%}
+{% endblock %}
 
 {% block form_help -%}
     {%- if help -%}
@@ -74,3 +111,17 @@
         {{- form_widget(form, widget_attr) -}}
     </div>
 {%- endblock form_row_render -%}
+
+{# Checkbox / Radio buttons #}
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="{% if multiple %}tbxforms-checkboxes{% else %}govuk-radios{% endif %}">
+            {%- for child in form %}
+                <div class="{% if multiple %}tbxforms-checkboxes__item{% else %}govuk-radios__item{% endif %}">
+                    {{- form_widget(child) -}}
+                    {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                </div>
+            {% endfor -%}
+        </div>
+    </div>
+{%- endblock choice_widget_expanded -%}
