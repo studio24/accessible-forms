@@ -1,6 +1,7 @@
 {# Extends vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig #}
 {% use 'form_div_layout.html.twig' %}
 
+{# Custom block to list errors #}
 {%- block form_error_summary -%}
     {% if form is not valid %}
     <div id="site-aria-alert" role="alert">
@@ -20,7 +21,7 @@
     {% endif %}
 {%- endblock form_error_summary -%}
 
-{#  Appears as error above each field #}
+{# Custom markup for field errors. Appears as error above each field #}
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {% for error in errors %}
@@ -29,11 +30,13 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+{#  Add class to form start #}
 {%- block form_start -%}
     {% set attr = attr|merge({'class': 'tbxforms'}) %}
     {{- parent() -}}
 {%- endblock form_start -%}
 
+{#  Add class to form rows #}
 {%- block form_row -%}
     {% set row_attr = row_attr|merge({'class': 'tbxforms-form-group'}) %}
     {%- if errors|length > 0 -%}
@@ -43,7 +46,7 @@
     {{- parent() -}}
 {%- endblock form_row -%}
 
-{# Field rows become fieldsets on checkbox and radio buttons, so make the label the legend #}
+{# Custom markup for labels. Compound groups become fieldsets, so make the label the legend for those #}
 {%- block form_label -%}
     {% if label is not same as(false) -%}
         {%- if compound -%}
@@ -62,6 +65,7 @@
     {%- endif -%}
 {%- endblock form_label -%}
 
+{# Labels for checkboxes buttons in choice blocks #}
 {% block checkbox_label %}
     {% if label is not same as(false) -%}
         {% if not compound -%}
@@ -75,6 +79,7 @@
     {%- endif -%}
 {% endblock %}
 
+{# Labels for radio buttons in choice blocks #}
 {% block radio_label %}
     {% if label is not same as(false) -%}
         {% if not compound -%}
@@ -88,6 +93,7 @@
     {%- endif -%}
 {% endblock %}
 
+{# Custom markup for field hints #}
 {% block form_help -%}
     {%- if help -%}
         <div id="id_{{ id }}_hint" class="rnib-form-hint">
@@ -96,12 +102,11 @@
     {%- endif -%}
 {%- endblock form_help %}
 
-{# Adjust order of elements in form row #}
+{# Adjust order of elements in form row, add fieldset for compound groups #}
 {%- block form_row_render -%}
     <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         {% if compound %}
             <fieldset class="tbxforms-fieldset">
-
         {% endif %}
         {{- form_label(form) -}}
         {{- form_help(form) -}}
@@ -113,6 +118,7 @@
     </div>
 {%- endblock form_row_render -%}
 
+{# This is for single non-choice checkboxes (eg. Agree to Terms) #}
 {% block checkbox_row %}
 <div class="tbxforms-form-group">
     <div class="tbxforms-checkboxes">
@@ -138,10 +144,12 @@
     </div>
 {%- endblock choice_widget_expanded -%}
 
+{# Add class to checkboxes #}
 {%- block checkbox_widget -%}
     <input type="checkbox" class="tbxforms-checkboxes__input" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
 {%- endblock checkbox_widget -%}
 
+{# Add class to radio buttons #}
 {%- block radio_widget -%}
     <input type="radio" class="govuk-radios__input" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
 {%- endblock radio_widget -%}
@@ -155,6 +163,7 @@
     {{- parent() -}}
 {%- endblock form_widget_simple -%}
 
+{# Add class to select boxes #}
 {%- block choice_widget_collapsed -%}
     {% set attr = attr|merge({'class': 'tbxforms-select'}) %}
     {{- parent() -}}
