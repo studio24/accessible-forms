@@ -50,7 +50,7 @@
 {%- block form_label -%}
     {% if label is not same as(false) -%}
         {%- if compound -%}
-            <legend><h2 class="rnib-form-label__wrapper">{{- block('form_label_content') -}}</h2></legend>
+            <legend class="tbxforms-fieldset legend"><h2 class="rnib-form-label rnib-form-label__wrapper">{{- block('form_label_content') -}}{% if required %} (required){% endif %}</h2></legend>
         {%- else -%}
             {% if not compound -%}
                 {% set label_attr = label_attr|merge({for: id}) %}
@@ -58,7 +58,7 @@
             {% set label_attr = label_attr|merge({'class': 'rnib-form-label'}) %}
             <h2 class="rnib-form-label__wrapper">
                 <label{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
-                    {{- block('form_label_content') -}}
+                    {{- block('form_label_content') -}}{% if required %} (required){% endif %}
                 </label>
             </h2>
         {%- endif -%}
@@ -160,6 +160,9 @@
     {%- if type == 'text' -%}
         {%- set attr = attr|merge({'class': 'tbxforms-input  tbxforms-input--text'}) -%}
     {% endif %}
+    {%- if type == 'file' -%}
+        {%- set attr = attr|merge({'class': 'tbxforms-input  tbxforms-input--file'}) -%}
+    {% endif %}
     {{- parent() -}}
 {%- endblock form_widget_simple -%}
 
@@ -180,3 +183,26 @@
     </button>
 {%- endblock button_widget -%}
 
+{%- block textarea_widget -%}
+    {% set attr = attr|merge({'class': 'tbxforms-input tbxforms-textarea'}) %}
+    {{- parent() -}}
+{%- endblock textarea_widget -%}
+
+{% block birthday_widget %}
+    {% if widget == 'single_text' %}
+        {{- block('form_widget_simple') -}}
+    {% else -%}
+        {%- set yearWidget = '<div class="date-subfield">' ~ form_label(form.year) ~ form_widget(form.year) ~ '</div>'|raw -%}
+        {%- set monthWidget = '<div class="date-subfield">' ~ form_label(form.month) ~ form_widget(form.month) ~ '</div>'|raw -%}
+        {%- set dayWidget = '<div class="date-subfield">' ~ form_label(form.day) ~ form_widget(form.day) ~ '</div>'|raw -%}
+
+        {%- set date_pattern = '{{ day }}{{ month }}{{ year }}' -%}
+
+        {{- date_pattern|replace({
+            '{{ year }}': yearWidget,
+            '{{ month }}': monthWidget,
+            '{{ day }}': dayWidget,
+        })|raw -}}
+
+    {% endif %}
+{% endblock birthday_widget %}
