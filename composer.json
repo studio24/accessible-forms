@@ -1,6 +1,6 @@
 {
     "name": "studio24/accessible-forms",
-    "description": "This is my package accessible-forms",
+    "description": "Create more accessible forms in your PHP apps.",
     "keywords": [
         "studio24",
         "forms",
