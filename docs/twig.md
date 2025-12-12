@@ -13,12 +13,12 @@ You can return all form error as an array of errors with `form_all_errors`. Each
 {% set all_errors = form_all_errors(form) %}
 ```
 
-### form_error_count
+### form_all_errors_count
 
 You can return the total number of errors in a form via `form_all_errors_count`.
 
 ```
-This form has {{ form_error_count(form) }} errors.
+This form has {{ form_all_errors_count(form) }} errors.
 ```
 
 ### form_error_summary

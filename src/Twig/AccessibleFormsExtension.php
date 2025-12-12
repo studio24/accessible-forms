@@ -69,9 +69,9 @@ class AccessibleFormsExtension extends AbstractExtension
         return $errors;
     }
 
-    public function allErrorsCount(): int
+    public function allErrorsCount(FormView $form): int
     {
-        return count($this->allErrors());
+        return count($this->allErrors($form));
     }
 
     public function errorsSummary(FormView $form): string
