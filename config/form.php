@@ -23,7 +23,7 @@ return [
     | See http://symfony.com/doc/current/form/form_customization.html
     */
     'template_directories' => [
-        __DIR__ . '/../vendor/studio24/accessible-forms/src/Resources/views/form'
+        __DIR__ . '/../vendor/studio24/accessible-forms/src/Resources/views/Form'
     ],
 
     'defaults' => [

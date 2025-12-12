@@ -13,7 +13,6 @@ Add the service provider to `bootstrap/providers.php`
 
 ```php
 return [
-    Studio24\AccessibleForms\Laravel\ServiceProvider::class,
     Barryvdh\Form\ServiceProvider::class,
 ];
 ```
@@ -28,6 +27,13 @@ return [
         ],
     ],
 ];
+```
+
+Copy config:
+
+```shell
+cp vendor/studio24/accessible-forms/config/form.php config/form.php
+php artisan cache:clear
 ```
 
 ## Usage
