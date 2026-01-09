@@ -25,7 +25,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {% for error in errors %}
-            <span id="id_{{ id }}_error{{ loop.index }}" class="tbxforms-error-message">Error: {{ error.message }}</span>
+            <span id="{{ id }}_error{{ loop.index }}" class="tbxforms-error-message">Error: {{ error.message }}</span>
         {% endfor %}
     {%- endif -%}
 {%- endblock form_errors -%}
@@ -96,7 +96,7 @@
 {# Custom markup for field hints #}
 {% block form_help -%}
     {%- if help -%}
-        <div id="id_{{ id }}_hint" class="rnib-form-hint">
+        <div id="{{ id }}_help" class="rnib-form-hint">
             {{- block('form_help_content') -}}
         </div>
     {%- endif -%}
