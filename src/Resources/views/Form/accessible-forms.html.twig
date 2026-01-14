@@ -4,20 +4,20 @@
 {# Custom block to list errors #}
 {%- block form_error_summary -%}
     {% if form is not valid %}
-    <div id="site-aria-alert" role="alert">
-        <div class="govuk-error-summary rnib-error-summary" data-module="govuk-error-summary">
-            <h2 class="govuk-error-summary__title rnib-error-summary__title">
-                There are {{ form_all_errors(form) | length }} problems with this request
-            </h2>
-            <div class="govuk-error-summary__body rnib-error-summary__body">
-                <ul class="govuk-error-summary__list rnib-error-summary__list">
-                    {% for error in form_all_errors(form) %}
-                    <li><a href='#{{ error.id }}'>{{ error.message }}</a></li>
-                    {% endfor %}
-                </ul>
+        <div id="site-aria-alert" role="alert">
+            <div class="govuk-error-summary rnib-error-summary" data-module="govuk-error-summary">
+                <h2 class="govuk-error-summary__title rnib-error-summary__title">
+                    There are {{ form_all_errors(form) | length }} problems with this request
+                </h2>
+                <div class="govuk-error-summary__body rnib-error-summary__body">
+                    <ul class="govuk-error-summary__list rnib-error-summary__list">
+                        {% for error in form_all_errors(form) %}
+                            <li><a href='#{{ error.id }}'>{{ error.message }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     {% endif %}
 {%- endblock form_error_summary -%}
 
@@ -25,7 +25,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {% for error in errors %}
-            <span id="id_{{ id }}_error{{ loop.index }}" class="tbxforms-error-message">Error: {{ error.message }}</span>
+            <span id="{{ id }}_error{{ loop.index }}" class="tbxforms-error-message">Error: {{ error.message }}</span>
         {% endfor %}
     {%- endif -%}
 {%- endblock form_errors -%}
@@ -74,7 +74,7 @@
         {% set label_attr = label_attr|merge({'class': 'tbxforms-label tbxforms-checkboxes__label'}) %}
 
         <label{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
-        {{- block('form_label_content') -}}
+            {{- block('form_label_content') -}}
         </label>
     {%- endif -%}
 {% endblock %}
@@ -88,7 +88,7 @@
         {% set label_attr = label_attr|merge({'class': 'rnib-form-label rnib-form-label--option govuk-radios__label'}) %}
 
         <label{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
-        {{- block('form_label_content') -}}
+            {{- block('form_label_content') -}}
         </label>
     {%- endif -%}
 {% endblock %}
@@ -96,7 +96,7 @@
 {# Custom markup for field hints #}
 {% block form_help -%}
     {%- if help -%}
-        <div id="id_{{ id }}_hint" class="rnib-form-hint">
+        <div id="{{ id }}_help" class="rnib-form-hint">
             {{- block('form_help_content') -}}
         </div>
     {%- endif -%}
@@ -106,28 +106,28 @@
 {%- block form_row_render -%}
     <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         {% if compound %}
-            <fieldset class="tbxforms-fieldset">
-        {% endif %}
-        {{- form_label(form) -}}
-        {{- form_help(form) -}}
-        {{- form_errors(form) -}}
-        {{- form_widget(form, widget_attr) -}}
-        {% if compound %}
-            </fieldset>
+        <fieldset class="tbxforms-fieldset">
+            {% endif %}
+            {{- form_label(form) -}}
+            {{- form_help(form) -}}
+            {{- form_errors(form) -}}
+            {{- form_widget(form, widget_attr) -}}
+            {% if compound %}
+        </fieldset>
         {% endif %}
     </div>
 {%- endblock form_row_render -%}
 
 {# This is for single non-choice checkboxes (eg. Agree to Terms) #}
 {% block checkbox_row %}
-<div class="tbxforms-form-group">
-    <div class="tbxforms-checkboxes">
-        <div class="tbxforms-checkboxes__item">
-            {{- form_widget(form, row_attr) -}}
-            {{- form_label(form) -}}
+    <div class="tbxforms-form-group">
+        <div class="tbxforms-checkboxes">
+            <div class="tbxforms-checkboxes__item">
+                {{- form_widget(form, row_attr) -}}
+                {{- form_label(form) -}}
+            </div>
         </div>
     </div>
-</div>
 {% endblock checkbox_row %}
 
 {# Add custom markup to checkbox / radio buttons in choice context #}
@@ -183,11 +183,13 @@
     </button>
 {%- endblock button_widget -%}
 
+{# Add class to textareas #}
 {%- block textarea_widget -%}
     {% set attr = attr|merge({'class': 'tbxforms-input tbxforms-textarea'}) %}
     {{- parent() -}}
 {%- endblock textarea_widget -%}
 
+{#  Customise markup and classes for birthday field #}
 {% block birthday_widget %}
     {% if widget == 'single_text' %}
         {{- block('form_widget_simple') -}}
@@ -206,3 +208,12 @@
 
     {% endif %}
 {% endblock birthday_widget %}
+
+{# Remove the required attribute from the element (disable frontend validation) #}
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {% set attr = attr|merge({'required': false}) %}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
+
