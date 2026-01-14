@@ -56,7 +56,7 @@
 {%- block form_label -%}
     {% if label is not same as(false) -%}
         {%- if compound -%}
-            <legend class="tbxforms-fieldset legend"><h2 class="rnib-form-label rnib-form-label__wrapper">{{- block('form_label_content') -}}{% if required %} *{% endif %}</h2></legend>
+            <legend class="tbxforms-fieldset legend"><h2 class="rnib-form-label rnib-form-label__wrapper">{{- block('form_label_content') -}}{% if required %} (required){% endif %}</h2></legend>
         {%- else -%}
             {% if not compound -%}
                 {% set label_attr = label_attr|merge({for: id}) %}
@@ -64,7 +64,7 @@
             {% set label_attr = label_attr|merge({'class': 'rnib-form-label'}) %}
             <h2 class="rnib-form-label__wrapper">
                 <label{% if label_attr %}{% with {attr: label_attr} %}{{ block('attributes') }}{% endwith %}{% endif %}>
-                    {{- block('form_label_content') -}}{% if required %} *{% endif %}
+                    {{- block('form_label_content') -}}{% if required %} (required){% endif %}
                 </label>
             </h2>
         {%- endif -%}
@@ -212,3 +212,10 @@
 
     {% endif %}
 {% endblock birthday_widget %}
+
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
