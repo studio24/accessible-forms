@@ -1,11 +1,6 @@
 {# Extends vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig #}
 {% use 'form_div_layout.html.twig' %}
 
-{# Custom block that gets included prior to form_start #}
-{% block form_prefix %}
-    <p>Fields marked * are required.</p>
-{% endblock %}
-
 {# Custom block to list errors #}
 {%- block form_error_summary -%}
     {% if form is not valid %}
@@ -38,7 +33,6 @@
 {#  Add class to form start #}
 {%- block form_start -%}
     {% set attr = attr|merge({'class': 'tbxforms'}) %}
-    {{- block('form_prefix') -}}
     {{- parent() -}}
 {%- endblock form_start -%}
 
