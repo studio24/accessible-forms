@@ -217,3 +217,9 @@
     {{ block('attributes') }}
 {%- endblock widget_attributes -%}
 
+{# Custom HTML block #}
+{%- block custom_html_block_row -%}
+    {%- if html is not empty -%}{{ html }}{%- endif -%}
+{%- endblock -%}
+
+
