@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Markup;
 
-class CustomHtmlBlockType extends AbstractType
+class Html extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
