@@ -16,6 +16,7 @@ It includes:
 - Support for the [GOV.UK Design System](https://design-system.service.gov.uk/)
 - Error summary block
 - Update page titles on form validation errors
+- An HTML block for inserting custom HTML into forms
 
 Each feature is explained in the [docs](docs/README.md). Usage instructions for Symfony and Laravel are included.
 
