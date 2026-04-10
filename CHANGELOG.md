@@ -2,6 +2,13 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.3](https://github.com/studio24/accessible-forms/compare/v0.1.2...v0.1.3) (2026-04-10)
+
+
+### Bug Fixes
+
+* create release ([b46bd59](https://github.com/studio24/accessible-forms/commit/b46bd59d2f9647031fd6d39fd3070a9b86e087dc))
+
 ## [0.1.2](https://github.com/studio24/accessible-forms/compare/v0.1.1...v0.1.2) (2026-01-14)
 
 
