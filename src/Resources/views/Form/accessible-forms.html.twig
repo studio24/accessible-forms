@@ -7,7 +7,11 @@
         <div id="site-aria-alert" role="alert">
             <div class="govuk-error-summary rnib-error-summary" data-module="govuk-error-summary">
                 <h2 class="govuk-error-summary__title rnib-error-summary__title">
-                    There are {{ form_all_errors(form) | length }} problems with this request
+                    {% if form_all_errors(form) | length == 1 %}
+                        There is a problem with this request
+                    {% else %}
+                        There are {{ form_all_errors(form) | length }} problems with this request
+                    {% endif %}
                 </h2>
                 <div class="govuk-error-summary__body rnib-error-summary__body">
                     <ul class="govuk-error-summary__list rnib-error-summary__list">
