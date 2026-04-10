@@ -124,7 +124,10 @@
 
 {# This is for single non-choice checkboxes (eg. Agree to Terms) #}
 {% block checkbox_row %}
-    <div class="tbxforms-form-group">
+    <div class="tbxforms-form-group{% if errors %} tbxforms-form-group--error{% endif %}">
+        {%- if errors -%}
+            <span class="tbxforms-error-message">{{ errors }}</span>
+        {%- endif -%}
         <div class="tbxforms-checkboxes">
             <div class="tbxforms-checkboxes__item">
                 {{- form_widget(form, row_attr) -}}
