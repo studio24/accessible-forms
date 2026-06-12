@@ -13,8 +13,9 @@ class Html extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'mapped' => false,
             'html' => null,
-            'view' => null
+            'view' => null,
         ]);
     }
 
