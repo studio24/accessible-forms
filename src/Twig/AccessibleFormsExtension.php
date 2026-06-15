@@ -59,6 +59,12 @@ class AccessibleFormsExtension extends AbstractExtension
         foreach ($form->children as $child) {
             if (isset($child->vars['errors']) && count($child->vars['errors']) > 0) {
 
+                $id = $child->vars['id'];
+
+                if (!empty($child->vars['choices']) && !empty($child->vars['expanded']) && $child->vars['expanded'] === true) {
+                    $id .= '_0';
+                }
+
                 $fieldErrors = explode('ERROR: ', (string) $child->vars['errors']);
 
                 foreach ($fieldErrors as $fieldError) {
@@ -67,7 +73,7 @@ class AccessibleFormsExtension extends AbstractExtension
                     }
 
                     $errors[] = [
-                        'id' => $child->vars['id'],
+                        'id' => $id,
                         'name' => $child->vars['full_name'],
                         'message' => 'Error: ' . $fieldError
                     ];
