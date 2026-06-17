@@ -2,6 +2,16 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.4](https://github.com/studio24/accessible-forms/compare/v0.1.3...v0.1.4) (2026-06-17)
+
+
+### Bug Fixes
+
+* Added missing error class for checkbox validation errors. ([425c9c2](https://github.com/studio24/accessible-forms/commit/425c9c23681e55f33f605939c207408f89dea91f))
+* Append _0 to error ID on checkbox and radio button groups, so that the error link jumps to the first input element instead of the surrounding block. ([3f4254a](https://github.com/studio24/accessible-forms/commit/3f4254a0f34c0a17d32313f63e300d30afe04f2d))
+* Disabled mapping by default on custom HTML block. ([b34e0de](https://github.com/studio24/accessible-forms/commit/b34e0deedcbc952d19d281ccac35327d85398b81))
+* Fixed issue with multiple errors for a single field being grouped onto one. ([b400ca0](https://github.com/studio24/accessible-forms/commit/b400ca00f613ca8bb2bd1fdf86e088698b44563c))
+
 ## [0.1.3](https://github.com/studio24/accessible-forms/compare/v0.1.3...v0.1.4) (2026-04-10)
 
 ### Bug Fixes
