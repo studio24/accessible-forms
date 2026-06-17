@@ -2,6 +2,16 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.3](https://github.com/studio24/accessible-forms/compare/v0.1.3...v0.1.4) (2026-04-10)
+
+### Bug Fixes
+
+* Set mapped to false by default for custom Html block type, to prevent the need to do so manually.
+* Moved choice fieldset element from form_row_render to choice_widget_expanded to allow checkbox attributes to be added to fieldset. (solves issue where screen readers were not announcing errors on checkbox/radio focus)
+* Fixed multiple validation errors for one field being listed as one error and appended to the same string.
+* Appended _0 to the error block so that the first checkbox/radio is highlighted when clicking the error summary anchor.
+
+
 ## [0.1.3](https://github.com/studio24/accessible-forms/compare/v0.1.2...v0.1.3) (2026-04-10)
 
 ### Bug Fixes
