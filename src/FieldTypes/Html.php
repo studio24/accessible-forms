@@ -21,11 +21,7 @@ class Html extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['html'] = $options['html'];
-
-        // Load in template as Twig\Markup object.
-        if (!empty($options['view'])) {
-            $view->vars['html'] = new Markup($options['view'], 'UTF-8');
-        }
+        $html = $options['view'] ?? $options['html'];
+        $view->vars['html'] = new Markup($html, 'UTF-8');
     }
 }
