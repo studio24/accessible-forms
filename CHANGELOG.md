@@ -2,6 +2,14 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.5](https://github.com/studio24/accessible-forms/compare/v0.1.4...v0.1.5) (2026-07-03)
+
+
+### Bug Fixes
+
+* Parse HTML correctly when not using a view on custom HTML block. ([900b790](https://github.com/studio24/accessible-forms/commit/900b7909abb8032c06ea27dcbeb620d43d420e4e))
+* restored previous fieldset configuration but with widget_container_attributes. ([1bf6bb8](https://github.com/studio24/accessible-forms/commit/1bf6bb8186701e9651a6947da248569daffc2f9f))
+
 ## [0.1.4](https://github.com/studio24/accessible-forms/compare/v0.1.3...v0.1.4) (2026-06-17)
 
 
