@@ -109,10 +109,18 @@
 {# Adjust order of elements in form row, add fieldset for compound groups #}
 {%- block form_row_render -%}
     <div{% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {% if compound %}
+            <fieldset class="tbxforms-fieldset" {{ block('widget_container_attributes') }}>
+        {% endif %}
+        
         {{- form_label(form) -}}
         {{- form_help(form) -}}
         {{- form_errors(form) -}}
         {{- form_widget(form, widget_attr) -}}
+
+        {% if compound %}
+            </fieldset>
+        {% endif %}
     </div>
 {%- endblock form_row_render -%}
 
@@ -133,9 +141,7 @@
 
 {# Add custom markup to checkbox / radio buttons in choice context #}
 {%- block choice_widget_expanded -%}
-    {% if compound %}
-        <fieldset class="tbxforms-fieldset" {{ block('widget_container_attributes') }}>
-    {% else %}
+    {% if not compound %}
         <div {{ block('widget_container_attributes') }}>
     {% endif %}
 
@@ -148,9 +154,7 @@
         {% endfor -%}
     </div>
 
-    {% if compound %}
-        </fieldset>
-    {% else %}
+    {% if not compound %}
         </div>
     {% endif %}
 {%- endblock choice_widget_expanded -%}
