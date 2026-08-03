@@ -2,6 +2,13 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.8](https://github.com/studio24/accessible-forms/compare/v0.1.7...v0.1.8) (2026-08-03)
+
+
+### Bug Fixes
+
+* include required attributeo on choicetype radio buttons. ([5134a73](https://github.com/studio24/accessible-forms/commit/5134a73df85e7f36494915db0776985f6cce1591))
+
 ## [0.1.7](https://github.com/studio24/accessible-forms/compare/v0.1.6...v0.1.7) (2026-08-03)
 
 
