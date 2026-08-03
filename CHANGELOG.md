@@ -2,6 +2,14 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.6](https://github.com/studio24/accessible-forms/compare/v0.1.5...v0.1.6) (2026-08-03)
+
+
+### Bug Fixes
+
+* Fixed aria-describedby for single checkbox error. ([d8ce104](https://github.com/studio24/accessible-forms/commit/d8ce10499a5b6b0f05751fc27715984324d2732f))
+* Prevented checkbox error class from always triggering. ([0ed0d99](https://github.com/studio24/accessible-forms/commit/0ed0d9913f01f76f337f6a4fdee8f5f0beb97a9c))
+
 ## [0.1.5](https://github.com/studio24/accessible-forms/compare/v0.1.4...v0.1.5) (2026-07-03)
 
 
