@@ -2,6 +2,13 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.1.7](https://github.com/studio24/accessible-forms/compare/v0.1.6...v0.1.7) (2026-08-03)
+
+
+### Bug Fixes
+
+* Reimplement required attribute on text fields. ([e66790b](https://github.com/studio24/accessible-forms/commit/e66790bdc312da51395f38a9b55250d3e49a5657))
+
 ## [0.1.6](https://github.com/studio24/accessible-forms/compare/v0.1.5...v0.1.6) (2026-08-03)
 
 
