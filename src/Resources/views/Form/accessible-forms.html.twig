@@ -241,14 +241,6 @@
     {% endif %}
 {% endblock birthday_widget %}
 
-{# Remove the required attribute from the element (disable frontend validation) #}
-{%- block widget_attributes -%}
-    id="{{ id }}" name="{{ full_name }}"
-    {%- if disabled %} disabled="disabled"{% endif -%}
-    {% set attr = attr|merge({'required': false}) %}
-    {{ block('attributes') }}
-{%- endblock widget_attributes -%}
-
 {# Custom HTML block #}
 {%- block html_row -%}
     {{ html }}
