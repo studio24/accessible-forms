@@ -112,7 +112,7 @@
         {% if compound %}
             <fieldset class="tbxforms-fieldset" {{ block('widget_container_attributes') }}>
         {% endif %}
-        
+
         {{- form_label(form) -}}
         {{- form_help(form) -}}
         {{- form_errors(form) -}}
@@ -126,10 +126,11 @@
 
 {# This is for single non-choice checkboxes (eg. Agree to Terms) #}
 {% block checkbox_row %}
-    <div class="tbxforms-form-group{% if errors %} tbxforms-form-group--error{% endif %}">
-        {%- if errors -%}
-            <span class="tbxforms-error-message">{{ errors }}</span>
+    <div class="tbxforms-form-group{% if errors|length %} tbxforms-form-group--error{% endif %}">
+        {%- if errors|length -%}
+            <span id="{{ id }}_error1" class="tbxforms-error-message">{{ errors }}</span>
         {%- endif -%}
+
         <div class="tbxforms-checkboxes">
             <div class="tbxforms-checkboxes__item">
                 {{- form_widget(form, row_attr) -}}
@@ -161,6 +162,22 @@
 
 {# Add class to checkboxes #}
 {%- block checkbox_widget -%}
+
+    {%- set attr = {} -%}
+    {%- set aria_describedby = [] -%}
+    {%- if help -%}
+        {%- set aria_describedby = aria_describedby|merge([id ~ '_help']) -%}
+    {%- endif -%}
+    {%- if errors|length > 0 -%}
+        {%- set aria_describedby = aria_describedby|merge(errors|map((_, index) => id ~ '_error' ~ (index + 1))) -%}
+    {%- endif -%}
+    {%- if aria_describedby|length > 0 -%}
+        {%- set attr = attr|merge({'aria-describedby': aria_describedby|join(' ')}) -%}
+    {%- endif -%}
+    {%- if errors|length > 0 -%}
+        {%- set attr = attr|merge({'aria-invalid': 'true'}) -%}
+    {%- endif -%}
+
     <input type="checkbox" class="tbxforms-checkboxes__input" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
 {%- endblock checkbox_widget -%}
 
