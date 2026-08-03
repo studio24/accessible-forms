@@ -149,7 +149,7 @@
     <div class="{% if multiple %}tbxforms-checkboxes{% else %}govuk-radios{% endif %}">
         {%- for child in form %}
             <div class="{% if multiple %}tbxforms-checkboxes__item{% else %}govuk-radios__item{% endif %}">
-                {{- form_widget(child) -}}
+                {{- form_widget(child, {'is_required': required}) -}}
                 {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
             </div>
         {% endfor -%}
@@ -183,7 +183,7 @@
 
 {# Add class to radio buttons #}
 {%- block radio_widget -%}
-    <input type="radio" class="govuk-radios__input" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    <input type="radio"{% if is_required %} required="required"{% endif %} class="govuk-radios__input" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
 {%- endblock radio_widget -%}
 
 {# Add classes to input elements #}
