@@ -11,8 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class DoNotRenderTestForm extends Form {
-
+class DoNotRenderTestForm extends Form
+{
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -52,5 +52,4 @@ class DoNotRenderTest extends TypeTestCase
          */
         $this->assertStringNotContainsString('<input type="number" id="do_not_render_test_form_page"', $html);
     }
-
 }
