@@ -2,6 +2,13 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.2.0](https://github.com/studio24/accessible-forms/compare/v0.1.8...v0.2.0) (2026-10-09)
+
+
+### Features
+
+* adding do_not_render form option to skip form elements in rendered HTML ([8f7c097](https://github.com/studio24/accessible-forms/commit/8f7c0977ace751bfa522b99782b7ca31b8824845))
+
 ## [0.1.8](https://github.com/studio24/accessible-forms/compare/v0.1.7...v0.1.8) (2026-08-03)
 
 
