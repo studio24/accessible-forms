@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Studio24\AccessibleForms\Twig;
@@ -58,7 +59,6 @@ class AccessibleFormsExtension extends AbstractExtension
         $errors = [];
         foreach ($form->children as $child) {
             if (isset($child->vars['errors']) && count($child->vars['errors']) > 0) {
-
                 $id = $child->vars['id'];
 
                 if (!empty($child->vars['choices']) && !empty($child->vars['expanded']) && $child->vars['expanded'] === true) {
@@ -114,5 +114,4 @@ class AccessibleFormsExtension extends AbstractExtension
         }
         return $string;
     }
-
 }
