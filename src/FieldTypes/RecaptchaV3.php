@@ -28,6 +28,7 @@ class RecaptchaV3 extends AbstractType
             'action' => 'submit',
             'score' => 0.5,
             'message' => 'We could not confirm this form was sent by a person. Please try submitting the form again.',
+            'nonce' => null,
             'rules' => function (Options $options) {
                 return [new RecaptchaV3Rule($options['action'], (float) $options['score'], $options['message'])];
             },
@@ -38,12 +39,14 @@ class RecaptchaV3 extends AbstractType
         $resolver->setAllowedValues('action', fn (string $action) => preg_match('/^[A-Za-z0-9_\/]+$/', $action) === 1);
         $resolver->setAllowedTypes('score', ['int', 'float']);
         $resolver->setAllowedTypes('message', 'string');
+        $resolver->setAllowedTypes('nonce', ['null', 'string']);
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['action'] = $options['action'];
         $view->vars['sitekey'] = config('recaptchav3.sitekey');
+        $view->vars['nonce'] = $options['nonce'];
     }
 
     public function getParent(): string

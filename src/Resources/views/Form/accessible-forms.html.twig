@@ -254,7 +254,7 @@
         {{- form_errors(form) -}}
         <input type="hidden" id="{{ id }}_token" name="{{ full_name }}" value="">
     </div>
-    <script>
+    <script{% if nonce %} nonce="{{ nonce }}"{% endif %}>
         (function () {
             var input = document.getElementById('{{ id|e('js') }}_token');
             var form = input && input.form;

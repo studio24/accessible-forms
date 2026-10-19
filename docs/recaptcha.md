@@ -54,8 +54,20 @@ The token is validated when the form is submitted via `$form->isValid()`. No ext
 | `action`  | `submit`   | reCAPTCHA action name, shown in the reCAPTCHA admin console. Letters, numbers, `/` and `_` only.       |
 | `score`   | `0.5`      | Minimum score (0.0 to 1.0) needed to pass validation.                                                 |
 | `message` | See below  | Error message shown in the error summary and above the field if verification fails.                  |
+| `nonce`   | `null`     | Content Security Policy nonce added to the inline `<script>`. Only added when set.                    |
 
 The default error message is "We could not confirm this form was sent by a person. Please try submitting the form again."
+
+### Content Security Policy
+
+The field renders an inline `<script>`. If your Content Security Policy blocks inline scripts, pass a nonce, for example with [spatie/laravel-csp](https://github.com/spatie/laravel-csp):
+
+```php
+->add('recaptcha', RecaptchaV3::class, [
+    'action' => 'contact',
+    'nonce' => app('csp-nonce'),
+])
+```
 
 ## Accessibility notes
 
