@@ -246,4 +246,56 @@
     {{ html }}
 {%- endblock -%}
 
+{# reCAPTCHA v3: requires the reCAPTCHA api.js script on the page.
+   The wrapper takes the field ID so error summary links move focus to the visible error message.
+   The token is fetched on submit so it cannot expire (after 2 minutes) while the form is being completed. #}
+{%- block recaptcha_v3_row -%}
+    <div id="{{ id }}" tabindex="-1"{% if errors|length > 0 %} class="tbxforms-form-group tbxforms-form-group--error"{% endif %}>
+        {{- form_errors(form) -}}
+        <input type="hidden" id="{{ id }}_token" name="{{ full_name }}" value="">
+    </div>
+    <script{% if nonce %} nonce="{{ nonce }}"{% endif %}>
+        (function () {
+            var input = document.getElementById('{{ id|e('js') }}_token');
+            var form = input && input.form;
+            if (!form) {
+                return;
+            }
+            var verified = false;
+            var pending = false;
+
+            form.addEventListener('submit', function (event) {
+                // If reCAPTCHA failed to load, submit anyway so the server can show a validation error
+                if (verified || typeof grecaptcha === 'undefined') {
+                    return;
+                }
+                event.preventDefault();
+                if (pending) {
+                    return;
+                }
+                pending = true;
+                var submitter = event.submitter || null;
+
+                var resubmit = function () {
+                    pending = false;
+                    verified = true;
+                    if (typeof form.requestSubmit === 'function') {
+                        form.requestSubmit(submitter);
+                    } else {
+                        form.submit();
+                    }
+                    verified = false;
+                };
+
+                grecaptcha.ready(function () {
+                    grecaptcha.execute('{{ sitekey|e('js') }}', {action: '{{ action|e('js') }}'}).then(function (token) {
+                        input.value = token;
+                        resubmit();
+                    }, resubmit);
+                });
+            });
+        })();
+    </script>
+{%- endblock recaptcha_v3_row -%}
+
 

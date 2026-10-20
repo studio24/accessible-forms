@@ -15,6 +15,9 @@
         "php": "^8.2",
         "barryvdh/laravel-form-bridge": "^0.7.4"
     },
+    "suggest": {
+        "josiasmontag/laravel-recaptchav3": "Required to use the RecaptchaV3 field type (Laravel only)"
+    },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": ">10",
