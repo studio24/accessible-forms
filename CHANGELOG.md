@@ -2,6 +2,14 @@
 
 All notable changes to accessible-forms will be documented in this file.
 
+## [0.3.0](https://github.com/studio24/accessible-forms/compare/v0.2.0...v0.3.0) (2026-10-20)
+
+
+### Features
+
+* Added optional nonce parameter to inline javascript for CSP support. ([765c20a](https://github.com/studio24/accessible-forms/commit/765c20aa0e0fe2c151a07adbb011924f0f8bea96))
+* Merge branch 'feature/recaptcha' of github.com:studio24/accessible-forms into feature/recaptcha ([8aabb87](https://github.com/studio24/accessible-forms/commit/8aabb8733bc478b70a6815dc2d023e14b8ed6b81))
+
 ## [0.2.0](https://github.com/studio24/accessible-forms/compare/v0.1.8...v0.2.0) (2026-10-09)
 
 
